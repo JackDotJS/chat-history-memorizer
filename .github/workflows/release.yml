@@ -14,9 +14,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      changelog_url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.tag }}
-      dl_url: ${{ github.server_url }}/${{ github.repository }}/releases/${{ inputs.tag }}/download/chat-history-memorizer.zip
     steps:
     - name: Workflow Information
       run: |
@@ -31,7 +28,10 @@ jobs:
       shell: powershell
     
     - name: Create Meta.json
-      run: $(cat .\.github\meta.json).Replace("%HASH%", $(./.github/hash.exe "./mod").Substring(17)).Replace("%CHANGELOG%", $changelog_url).Replace("%DOWNLOAD%", $dl_url) > ./meta.json
+      env:
+        changelog_url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.tag }}
+        dl_url: ${{ github.server_url }}/${{ github.repository }}/releases/${{ inputs.tag }}/download/chat-history-memorizer.zip
+      run: $(cat .\.github\meta.json).Replace("%HASH%", $(./.github/hash.exe "./mod").Substring(17)).Replace("%CHANGELOG%", ${{ env.changelog_url }}).Replace("%DOWNLOAD%", ${{ env.dl_url }}) > ./meta.json
 
     - name: Create New Release
       uses: softprops/action-gh-release@v1
