@@ -29,8 +29,8 @@ jobs:
     
     - name: Create Meta.json
       env:
-        changelog_url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.tag }}
-        dl_url: ${{ github.server_url }}/${{ github.repository }}/releases/${{ inputs.tag }}/download/chat-history-memorizer.zip
+        changelog_url: "${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.tag }}"
+        dl_url: "${{ github.server_url }}/${{ github.repository }}/releases/${{ inputs.tag }}/download/chat-history-memorizer.zip"
       run: $(cat .\.github\meta.json).Replace("%HASH%", $(./.github/hash.exe "./mod").Substring(17)).Replace("%CHANGELOG%", ${{ env.changelog_url }}).Replace("%DOWNLOAD%", ${{ env.dl_url }}) > ./meta.json
 
     - name: Create New Release
