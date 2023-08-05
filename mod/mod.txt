@@ -1,0 +1,14 @@
+{
+  "name": "Chat History Memorizer",
+  "description": "Saves chat message history between heists.",
+  "author": "JackDotJS",
+  "contact": "https://jackdotjs.github.io/",
+  "version": "1.0",
+  "blt_verison": 2,
+  "color": "0.623 0.729 0.101",
+  "updates": [
+    {
+      "identifier": "chat-history-memorizer"
+    }
+  ]
+}
