@@ -15,7 +15,6 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-      mod_hash: $(./.github/hash.exe "./SampleMod").Substring(17)
       changelog_url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.tag }}
       dl_url: ${{ github.server_url }}/${{ github.repository }}/releases/${{ inputs.tag }}/download/chat-history-memorizer.zip
     steps:
@@ -25,9 +24,12 @@ jobs:
     - name: Create Mod Archive
       run: .\.github\7za.exe -tzip a ".\chat-history-memorizer.zip" ".\mod"
       shell: powershell
+
+    - name: Create Mod Hash
+      run: echo "mod_hash=$(./.github/hash.exe "./SampleMod").Substring(17)" >> "$GITHUB_ENV"
     
     - name: Create Meta.json
-      run: $(cat .\.github\meta.json).Replace("%HASH%", $mod_hash).Replace("%CHANGELOG%", $changelog_url).Replace("%DOWNLOAD%", $dl_url) > ./meta.json
+      run: $(cat .\.github\meta.json).Replace("%HASH%", ${{ env.mod_hash }}).Replace("%CHANGELOG%", $changelog_url).Replace("%DOWNLOAD%", $dl_url) > ./meta.json
 
     - name: Create New Release
       uses: softprops/action-gh-release@v1
