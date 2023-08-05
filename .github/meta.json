@@ -1,0 +1,8 @@
+[
+    {
+        "ident" : "chat-history-memorizer",
+        "hash" : "%HASH%",
+        "patchnotes_url" : "%CHANGELOG%",
+        "download_url" : "%DOWNLOAD%"
+    }
+]

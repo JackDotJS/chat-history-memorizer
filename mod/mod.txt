@@ -8,7 +8,8 @@
   "color": "0.623 0.729 0.101",
   "updates": [
     {
-      "identifier": "chat-history-memorizer"
+      "identifier": "chat-history-memorizer",
+      "hash": "https://github.com/jackdotjs/chat-history-memorizer/releases/latest/download/meta.json"
     }
   ]
 }

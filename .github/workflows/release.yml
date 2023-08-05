@@ -1,0 +1,40 @@
+name: Create Mod Release
+# Loosely based on: https://github.com/morerokk/PD2AutoUpdateExample
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        type: string
+        description: Tag to use for this release. Also used for release title.
+        required: true
+      description:
+        type: string
+        description: Description for this release. Should include a changelog.
+        required: true
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      mod_hash: $(./.github/hash.exe "./SampleMod").Substring(17)
+      changelog_url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.tag }}
+      dl_url: ${{ github.server_url }}/${{ github.repository }}/releases/${{ inputs.tag }}/download/chat-history-memorizer.zip
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Create Mod Archive
+      run: .\.github\7za.exe -tzip a ".\chat-history-memorizer.zip" ".\mod"
+      shell: powershell
+    
+    - name: Create Meta.json
+      run: $(cat .\.github\meta.json).Replace("%HASH%", $mod_hash).Replace("%CHANGELOG%", $changelog_url).Replace("%DOWNLOAD%", $dl_url) > ./meta.json
+
+    - name: Create New Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ inputs.tag }}
+        body: ${{ inputs.description }}
+        generate_release_notes: true
+        files: |
+          chat-history-memorizer.zip
+          meta.json
