@@ -31,7 +31,7 @@ jobs:
       shell: powershell
 
     - name: Create Mod Hash
-      run: echo "mod_hash=$(./.github/hash.exe "./SampleMod").Substring(17)" >> "$GITHUB_ENV"
+      run: echo "mod_hash=$(./.github/hash.exe "./mod").Substring(17)" >> "$GITHUB_ENV"
     
     - name: Create Meta.json
       run: $(cat .\.github\meta.json).Replace("%HASH%", ${{ env.mod_hash }}).Replace("%CHANGELOG%", $changelog_url).Replace("%DOWNLOAD%", $dl_url) > ./meta.json
