@@ -24,14 +24,14 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Create Mod Archive
-      run: .\.github\7za.exe -tzip a ".\chat-history-memorizer.zip" ".\mod"
+      run: .\.github\7za.exe -tzip a ".\chat-history-memorizer.zip" ".\chat-history-memorizer"
       shell: powershell
     
     - name: Create Meta.json
       env:
         changelog_url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.tag }}
         dl_url: ${{ github.server_url }}/${{ github.repository }}/releases/download/${{ inputs.tag }}/chat-history-memorizer.zip
-      run: $(cat .\.github\meta.json).Replace("%HASH%", $(./.github/hash.exe "./mod").Substring(17)).Replace("%CHANGELOG%", "${{ env.changelog_url }}").Replace("%DOWNLOAD%", "${{ env.dl_url }}") > ./meta.json
+      run: $(cat .\.github\meta.json).Replace("%HASH%", $(./.github/hash.exe "./chat-history-memorizer").Substring(17)).Replace("%CHANGELOG%", "${{ env.changelog_url }}").Replace("%DOWNLOAD%", "${{ env.dl_url }}") > ./meta.json
 
     - name: Create New Release
       uses: softprops/action-gh-release@v1
