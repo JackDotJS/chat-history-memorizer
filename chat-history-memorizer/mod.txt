@@ -9,7 +9,9 @@
   "updates": [
     {
       "identifier": "chat-history-memorizer",
-      "hash": "https://github.com/jackdotjs/chat-history-memorizer/releases/latest/download/meta.json"
+      "host": {
+        "hash": "https://github.com/jackdotjs/chat-history-memorizer/releases/latest/download/meta.json"
+      }
     }
   ]
 }
