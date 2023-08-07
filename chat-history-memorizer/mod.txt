@@ -13,5 +13,11 @@
         "meta": "https://github.com/jackdotjs/chat-history-memorizer/releases/latest/download/meta.json"
       }
     }
+  ],
+  "hooks" : [
+    {
+      "hook_id": "lib/managers/chatmanager",
+      "script_path": "mod.lua"
+    }
   ]
 }
