@@ -5,9 +5,9 @@ function ChatManager:_receive_message(channel_id, name, message, color, icon)
   --   return
   -- end
 
-  log("[CHM] channel_id" .. tostring(channel_id))
-  log("[CHM] name" .. tostring(name))
-  log("[CHM] message" .. message)
-  log("[CHM] color" .. tostring(color))
-  log("[CHM] icon" .. tostring(icon))
+  log("[CHM] channel_id: " .. tostring(channel_id))
+  log("[CHM] name: " .. tostring(name))
+  log("[CHM] message: " .. message)
+  log("[CHM] color: " .. tostring(color))
+  log("[CHM] icon: " .. tostring(icon))
 end
